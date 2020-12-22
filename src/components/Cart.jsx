@@ -78,7 +78,7 @@ class Cart extends React.Component {
                     <Button style={{ margin: '0 3px' }} onClick={() => this.changeOne(1, item.id, item.size)}> + </Button>
                   </Button.Group>,
                   <div>
-                    <CloseSquareOutlined onClick={() => this.removeData(item.id, item.size)} style={{ fontSize: '16px'}} />
+                    <CloseSquareOutlined onClick={() => this.removeData(item.id, item.size)} style={{ fontSize: '16px' }} />
                   </div>
 
                 ]}

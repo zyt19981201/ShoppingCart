@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Card, Button, Popover, List, Tooltip, notification } from 'antd';
+import { Card, Button, Popover, List, Tooltip, notification, Row, Col } from 'antd';
 import {
     SyncOutlined,
 } from '@ant-design/icons';
@@ -37,12 +37,12 @@ class Goods extends React.Component {
             }
         })
         if (key == null) {
-            this.setState({sizeKey:'DEFAULT'})
+            this.setState({ sizeKey: 'DEFAULT' })
             // this.sizeKey = 'DEFAULT'
         } else {
-            this.setState({sizeKey:key})
+            this.setState({ sizeKey: key })
         }
-        
+
         // console.log(this.sizeKey);
     }
     // 
@@ -114,7 +114,7 @@ class Goods extends React.Component {
                         <span style={{ fontSize: '20px' }}>{item.currencyFormat}</span>
                         <span style={{ fontSize: '30px' }}>{num1}</span>
                         <span>.</span>
-                        <span style={{ fontSize: '20px' }}>{num2}</span>
+                        <span style={{ fontSize: '20px' }}>{num2 ? num2 : 0}</span>
                     </div>
                     <Popover
                         content={
@@ -139,24 +139,19 @@ class Goods extends React.Component {
         });
         return (
             <>
-                <div style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: 'center' }}>
-
-                    <div >
-                        <h3 style={{ fontWeight: 'bold', marginLeft: '50px' }}>{` ${productData.length} Product(s) found.`}</h3>
-                    </div>
-                    <div style={{ display: "flex", justifyContent: "space-between", marginRight: '50px', alignItems: 'center' }}>
-                        <h3 style={{ fontWeight: 'bold' }} onChange={this.handleSizeChange}>Order by:</h3>
+                <Row style={{ width: '100%' }}>
+                    <Col sm={24} xl={12}>
+                        <span style={{ fontWeight: 'bold', marginLeft: '50px',fontSize:'20px' }}>{` ${productData.length} Product(s) found.`}</span>
+                    </Col>
+                    <Col sm={24} xl={12}>
+                        <span style={{ fontWeight: 'bold', fontSize:'20px' }} onChange={this.handleSizeChange}>Order by:</span>
                         <span>
                             {arr.map((item, index) => (
                                 <Button className={item === sizeKey ? styles.btns : styles.btn} key={index} onClick={() => this.onCollate(item)} type="dashed" >{item.toLocaleUpperCase()}</Button>
                             ))}
-                            {/* <Button className={styles.btn} key="setting:1" onClick={() => this.onCollate()} type="dashed" >DEFAULT</Button>
-                            <Button className={styles.btn} key="setting:2" onClick={() => this.onCollate('up')} type="dashed" >ASC</Button>
-                            <Button className={styles.btn} key="setting:3" onClick={() => this.onCollate('down')} type="dashed" >DESC</Button> */}
                         </span>
-                    </div>
-
-                </div>
+                    </Col>
+                </Row>
                 <div style={{ display: 'flex', flexFlow: 'row wrap', justifyContent: 'space-around' }}>
                     {this.state.key ? (<div className="icons-list" style={{ fontSize: "50px", textAlign: "center" }}>
                         <SyncOutlined spin />

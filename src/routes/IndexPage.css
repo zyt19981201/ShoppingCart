@@ -38,3 +38,55 @@
   color: white !important;
 }
 
+.screen {
+  position: fixed;
+  z-index: 2;
+  margin: 100px 56px;
+}
+
+.drawer {
+  width: 100%;
+}
+
+.content {
+  margin-top: 64px;
+}
+
+:global(.ant-drawer-content-wrapper) {
+  width: 550px !important;
+}
+
+:global(.ant-list-item-meta-title) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+:global(.ant-list-item-meta-description) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 1200px) {
+  :global(.ant-layout.ant-layout-has-sider) {
+    flex-direction: column !important;
+  }
+
+  .screen {
+    position: initial;
+    margin: 20px 56px;
+  }
+
+  :global(.ant-drawer-content-wrapper) {
+    width: 100% !important;
+  }
+
+  .drawer {
+    width: 100%;
+  }
+
+  .content {
+    margin-top: initial;
+  }
+}

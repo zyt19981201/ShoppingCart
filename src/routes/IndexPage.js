@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Layout, Drawer, Button,Badge, } from 'antd';
+import { Layout, Drawer, Button,Badge, Row,Col } from 'antd';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import styles from "./IndexPage.css"
 import Goods from '../components/Goods'
@@ -39,35 +39,43 @@ class IndexPage extends React.Component {
     const {count} = this.props
     return (
       <div>
-        <Layout>
-          <Sider width="300px" style={{backgroundColor:'#F0F2F5',flex: '0 0 300px'}}>
-            <div style={{ position: 'fixed',zIndex: 2,margin:'100px 56px'}}>
-              <Screen/>
-            </div>
-          </Sider>
-          <Layout >
-            <Content className="site-layout" style={{ marginTop: '64px'}}>
-              <div className={styles.productlist} style={{ padding: 24, minHeight: 580, display: 'flex', flexFlow: 'row wrap', justifyContent: 'space-around',width:'100%' }}>
-                <Goods />
+        <Row>
+          <Layout>
+            <Col xs={24} xl={3}>
+              <Sider width="300px" style={{backgroundColor:'#F0F2F5',flex: '0 0 300px'}}>
+                <div className={styles.screen}>
+                  <Screen/>
+                </div>
+              </Sider>
+            </Col>
+            <Col xs={24} xl={21}>
+              <Layout className={styles.content}>
+                <Content className="site-layout">
+                  <div className={styles.productlist} style={{ padding: 24, minHeight: 580, display: 'flex', flexFlow: 'row wrap', justifyContent: 'space-around',width:'100%' }}>
+                    <Goods />
+                  </div>
+                </Content>
+                <Footer style={{ textAlign: 'center',fontSize:"30px" }}></Footer>
+              </Layout>
+            </Col>
+            <Col>
+              <div style={{ position: 'fixed',zIndex: 2,top:0,right:0}} >
+                <Badge count={count} showZero  offset={[-9, 28]} size="small" style={{backgroundColor:'#faad14'}}>
+                  <Button type="primary" icon={<ShoppingCartOutlined />} onClick={this.showDrawer} size='large' style={{backgroundColor:'black',border:'none'}}/>
+                </Badge>
               </div>
-            </Content>
-            <Footer style={{ textAlign: 'center',fontSize:"30px" }}></Footer>
+              <Drawer
+                title="Shopping cart details"
+                className={styles.drawer}
+                placement="right"
+                onClose={this.onClose}
+                visible={this.state.visible}
+              >
+              <Cart />
+              </Drawer>
+            </Col>
           </Layout>
-          <div style={{ position: 'fixed',zIndex: 2,top:0,right:0}} >
-            <Badge count={count} showZero  offset={[-9, 28]} size="small" style={{backgroundColor:'#faad14'}}>
-              <Button type="primary" icon={<ShoppingCartOutlined />} onClick={this.showDrawer} size='large' style={{backgroundColor:'black',border:'none'}}/>
-            </Badge>
-          </div>
-          <Drawer
-            title="Shopping cart details"
-            width="550"
-            placement="right"
-            onClose={this.onClose}
-            visible={this.state.visible}
-          >
-            <Cart />
-          </Drawer>
-        </Layout>
+        </Row>
       </div>
     );
   }
