@@ -98,10 +98,10 @@ class Goods extends React.Component {
         const { productData } = this.props
         const { sizeKey } = this.state
         const list = (productData || []).map((item, key) => {
-            let newPrice = item.price + ''
+            let newPrice = item.price.toFixed(2) + ''
             const newPrices = newPrice.split(".");
             const num1 = newPrices[0] //整数
-            const num2 = newPrices[1] //小数
+            const num2 = newPrices[1]   //小数
             return (
                 <Card className="cart" style={{ width: 300, margin: 10, borderRadius: "3%" }} key={key}>
                     <Tooltip placement="rightTop" title="Free shopping">
@@ -141,10 +141,10 @@ class Goods extends React.Component {
             <>
                 <Row style={{ width: '100%' }}>
                     <Col sm={24} xl={12}>
-                        <span style={{ fontWeight: 'bold', marginLeft: '50px',fontSize:'20px' }}>{` ${productData.length} Product(s) found.`}</span>
+                        <span style={{ fontWeight: 'bold', marginLeft: '50px', fontSize: '20px' }}>{` ${productData.length} Product(s) found.`}</span>
                     </Col>
                     <Col sm={24} xl={12}>
-                        <span style={{ fontWeight: 'bold', fontSize:'20px' }} onChange={this.handleSizeChange}>Order by:</span>
+                        <span style={{ fontWeight: 'bold', fontSize: '20px' }} onChange={this.handleSizeChange}>Order by:</span>
                         <span>
                             {arr.map((item, index) => (
                                 <Button className={item === sizeKey ? styles.btns : styles.btn} key={index} onClick={() => this.onCollate(item)} type="dashed" >{item.toLocaleUpperCase()}</Button>
